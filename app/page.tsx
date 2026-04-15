@@ -57,6 +57,7 @@ function PostCard({
             }
             alt={post.user?.username || "default_user"}
             fill
+            sizes="40px"
             className="object-cover"
           />
         </div>
@@ -76,6 +77,7 @@ function PostCard({
           src={post.image_url}
           alt={`Post de ${post.user?.username || "default_user"}`}
           fill
+          sizes="(max-width: 512px) 100vw, 512px"
           className="object-cover"
         />
       </div>
@@ -130,11 +132,13 @@ export default function Home() {
       const { data, error } = await supabase
         .from("posts_new")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .order("id", { ascending: false });
 
       if (error) {
-        console.error("Error al obtener los posts:", error);
+        console.error("Error al obtener los posts:", error.message, error.code, error.details, error.hint);
       } else {
+        console.log("Posts ordenados por fecha :", data);
         setPosts(data);
       }
     };

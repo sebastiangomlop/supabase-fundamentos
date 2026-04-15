@@ -65,6 +65,7 @@ function Modal({
               src={post.user?.avatar || "https://xynshcnkxdliapebmyaz.supabase.co/storage/v1/object/public/images/posts/unnamed-14.jpg"}
               alt={post.user?.username || "default_user"}
               fill
+              sizes="40px"
               className="object-cover"
             />
           </div>
@@ -80,6 +81,7 @@ function Modal({
             src={post.image_url}
             alt={`Post de ${post.user?.username || "default_user"}`}
             fill
+            sizes="(max-width: 512px) 100vw, 512px"
             className="object-cover"
           />
         </div>
@@ -116,7 +118,7 @@ export default function RankPage() {
         .order("likes", { ascending: false })
 
       if (error) {
-        console.error("Error al obtener los posts:", error);
+        console.error("Error al obtener los posts:", error.message, error.code, error.details, error.hint);
       } else {
         console.log("Posts obtenidos:", data);
         setPosts(data);
@@ -150,6 +152,7 @@ export default function RankPage() {
                 src={post.image_url}
                 alt={`Post con ${post.likes} likes`}
                 fill
+                sizes="(max-width: 672px) 33vw, 224px"
                 className="object-cover transition-transform group-hover:scale-105"
               />
               {/* Overlay con likes al hover */}

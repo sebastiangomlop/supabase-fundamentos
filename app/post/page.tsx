@@ -140,6 +140,7 @@ export default function CreatePage() {
                   src={imagePreview}
                   alt="Preview"
                   fill
+                  sizes="(max-width: 512px) 100vw, 512px"
                   className="object-cover"
                 />
                 <button
